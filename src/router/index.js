@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Replace from '@/components/replace'
+import Timeline from '@/components/Timeline'
 
 Vue.use(Router)
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Replace',
-      component: Replace
+      name: 'Timeline',
+      component: Timeline
     }
   ]
 })
