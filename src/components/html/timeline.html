@@ -1,7 +1,9 @@
 <div>
     <h1>Timeline!</h1>
     <div>
-        {{ res }}
+        <div v-for="said in saids">
+            <!-- TODO forで回してるsaidを渡すだけでいい感じにsaidを表示する子コンポーネントを作る -->
+            <p>{{ said.text }}</p>
+        </div>
     </div>
-    <p>{{ endpoint }}</p>
 </div>

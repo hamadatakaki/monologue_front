@@ -1,0 +1,19 @@
+<div>
+  <h1>Sign in</h1>
+  <form>
+    <label>user name:</label>
+    <input type="text" v-model="userName"><br>
+
+    <label>email:</label>
+    <input type="text" v-model="email"><br>
+
+    <label>password:</label>
+    <input type="text" v-model="password"><br>
+
+    <input type="button" @click="login">
+  </form>
+  <div class="list">
+    {{ res }}
+  </div>
+  <a href="#/timeline/">to timeline</a>
+</div>
