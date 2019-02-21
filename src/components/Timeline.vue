@@ -2,6 +2,7 @@
 <style lang="scss" src="./scss/timeline.scss"></style>
 <script>
     import controller from './js/controller'
+    import Said from './Said'
 
     export default {
         name: 'timeline',
@@ -9,6 +10,9 @@
             return {
                 saids: null,
             }
+        },
+        components: {
+            Said
         },
         methods: {
 
@@ -18,7 +22,7 @@
                 'Authorization': "Token " + localStorage.token
             };
             controller.axios
-                .get('saids/', { headers: tokenHeader })
+                .get('timeline/', { headers: tokenHeader })
                 .then(response => {
                     this.saids = response.data;
                 })

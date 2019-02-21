@@ -23,7 +23,7 @@ export default new Router({
       component: Timeline
     },
     {
-      path: '/account/:id/profile',
+      path: '/profile/:uuid',
       name: 'Profile',
       component: Profile
     }

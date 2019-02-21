@@ -7,7 +7,6 @@
         data() {
             return {
                 userName: "",
-                email: "",
                 password: "",
                 res: null
             };
@@ -16,7 +15,6 @@
             login() {
                 let param = {}
                 param.username = this.userName
-                param.email = this.email
                 param.password = this.password
 
                 controller.axios
