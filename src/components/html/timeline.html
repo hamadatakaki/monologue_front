@@ -1,7 +1,8 @@
 <div>
     <h1>Timeline!</h1>
-    <div>
-        {{ res }}
+    <div id="timeline">
+        <div v-for="said in saids">
+            <said :said="said"></said>
+        </div>
     </div>
-    <p>{{ endpoint }}</p>
 </div>

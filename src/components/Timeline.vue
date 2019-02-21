@@ -1,25 +1,31 @@
 <template src="./html/timeline.html"></template>
 <style lang="scss" src="./scss/timeline.scss"></style>
 <script>
-    import axios from 'axios'
-
-    let ep = process.env.ENDPOINT
+    import controller from './js/controller'
+    import Said from './Said'
 
     export default {
         name: 'timeline',
-        data () {
+        data: function () {
             return {
-                endpoint: process.env.ENDPOINT,
-                res: "hoe"
+                saids: null,
             }
+        },
+        components: {
+            Said
         },
         methods: {
 
         },
         created: function() {
-            axios
-                .get(ep+"saids")
-                .then(response => this.res = response["data"])
+            let tokenHeader = {
+                'Authorization': "Token " + localStorage.token
+            };
+            controller.axios
+                .get('timeline/', { headers: tokenHeader })
+                .then(response => {
+                    this.saids = response.data;
+                })
         }
     }
 </script>
