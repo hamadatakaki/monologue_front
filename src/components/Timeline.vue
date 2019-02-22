@@ -14,9 +14,6 @@
         components: {
             Said
         },
-        methods: {
-
-        },
         created: function() {
             let tokenHeader = {
                 'Authorization': "Token " + localStorage.token
