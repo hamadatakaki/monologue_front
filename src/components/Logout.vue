@@ -1,17 +1,18 @@
 <template>
     <div>
-        <h1>Sign out</h1>
+        <h1>log out</h1>
         <form>
             <input type="button" @click="logout">
         </form>
-        <a href="#/signin/">to signin</a>
+        <a href="#/login/">to login</a>
     </div>
 </template>
-<style lang="scss" src="./scss/signin.scss"></style>
+<style lang="scss" src="./scss/logout.scss"></style>
 <script>
     import controller from "./js/controller";
 
     export default {
+        name: "logout",
         data() {
             return {
                 userName: ""
@@ -19,7 +20,9 @@
         },
         methods: {
             logout() {
-                localStorage.token = ""
+                localStorage.token = "";
+
+                this.$router.push({ "name": "login" })
             }
         }
     }
