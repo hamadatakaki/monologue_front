@@ -31,7 +31,6 @@ const router = new Router({
       meta: { requireAuth: true },
       beforeEnter: redirectToLogin,
       beforeUpdate: redirectToLogin
-
     },
     {
       path: '/login',

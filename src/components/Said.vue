@@ -14,7 +14,7 @@
     import controller from './js/controller'
 
     export default {
-        name: 'Said.vue',
+        name: 'said',
         data: function() {
             return {
 

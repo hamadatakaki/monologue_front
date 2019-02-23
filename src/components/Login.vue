@@ -14,7 +14,7 @@
         </div>
         <div v-else>
             <h1>すでにLoginしています</h1>
-            <a @click="toTimeline">Timelineに戻る</a>
+            <a href="/">Timelineに戻る</a>
         </div>
     </div>
 </template>
@@ -44,8 +44,7 @@
                         localStorage.token = res.data.key
                         this.$router.push({ "name": "timeline" })
                     }).catch(() => this.message = "アカウントID、もしくはパスワードが違います")
-            },
-            toTimeline: () => this.$router.push({ "name": "timeline" })
+            }
         }
     }
 </script>
