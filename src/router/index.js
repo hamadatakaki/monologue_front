@@ -44,6 +44,19 @@ const router = new Router({
       meta: { requireAuth: true },
       beforeEnter: redirectToLogin,
       beforeUpdate: redirectToLogin
+    },
+    {
+      path: '/profile/:uuid',
+      component: Profile,
+      name: 'profile',
+      props: true,
+      meta: { requireAuth: true },
+      beforeEnter: redirectToLogin,
+      beforeUpdate: redirectToLogin
+    },
+    {
+        path: '*',
+        component: Fail
     }
   ]
 })
