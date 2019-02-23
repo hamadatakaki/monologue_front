@@ -6,10 +6,7 @@
 
 <script>
 export default {
-  name: 'App',
-  beforeCreate() {
-    localStorage.isloggined = false
-  }
+  name: 'App'
 }
 </script>
 
