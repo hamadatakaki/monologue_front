@@ -13,11 +13,9 @@ Vue.use(Router)
 
 let redirectToLogin = ((to, from, next) => {
   if (controller.is_logined()){
-    console.log("user is logined with "+localStorage.token)
     next()
   }
   else {
-    console.log("user is logouted")
     next({ name: 'login' })
   }
 })
