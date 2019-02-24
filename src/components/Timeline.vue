@@ -1,4 +1,13 @@
-<template src="./html/timeline.html"></template>
+<template>
+    <div>
+        <h1>Timeline!</h1>
+        <div id="timeline">
+            <div v-for="said in saids">
+                <said :said="said"></said>
+            </div>
+        </div>
+    </div>
+</template>
 <style lang="scss" src="./scss/timeline.scss"></style>
 <script>
     import controller from './js/controller'
@@ -14,10 +23,7 @@
         components: {
             Said
         },
-        methods: {
-
-        },
-        created: function() {
+        created: function () {
             let tokenHeader = {
                 'Authorization': "Token " + localStorage.token
             };

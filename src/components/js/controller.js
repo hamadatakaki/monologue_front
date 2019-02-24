@@ -1,7 +1,6 @@
 import Axios from 'axios';
 
 export default {
-
     axios: Axios.create({
         baseURL: process.env.ENDPOINT,
         headers: {
@@ -9,6 +8,7 @@ export default {
             'X-Requested-With': 'XMLHttpRequest',
         },
         responseType: "json"
-    })
+    }),
+    is_logined: () => !!localStorage.token
 }
 
