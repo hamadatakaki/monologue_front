@@ -6,7 +6,7 @@
 
     export default {
         name: 'timeline',
-        data: function () {
+        data: () => {
             return {
                 saids: null,
             }
@@ -14,7 +14,7 @@
         components: {
             Said
         },
-        created: function() {
+        created: () => {
             let tokenHeader = {
                 'Authorization': "Token " + localStorage.token
             };
