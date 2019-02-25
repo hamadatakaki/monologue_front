@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Timeline!</h1>
-        <div id="timeline">
+        <div id="user-saids">
             <div v-for="said in saids">
                 <said :said="said"></said>
             </div>
@@ -17,7 +17,7 @@
         name: 'timeline',
         data: function () {
             return {
-                saids: null,
+                saids: null
             }
         },
         components: {
@@ -31,6 +31,14 @@
                 .get('timeline/', { headers: tokenHeader })
                 .then(response => {
                     this.saids = response.data;
+                })
+                .catch(badstatus => {
+                    let res = badstatus.response
+                    if (res.status === 403 || res.statusText === "Forbidden") {
+                        localStorage.token = ""
+                    }
+
+                    this.$router.push({ "name": "login" })
                 })
         }
     }

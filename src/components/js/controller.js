@@ -9,6 +9,15 @@ export default {
         },
         responseType: "json"
     }),
-    is_logined: () => !!localStorage.token
+    is_logined: () => !!localStorage.token,
+    null2empty: mess => {
+        for(let i=0;i<mess.length;i++) {
+            if (mess[i] == null) {
+                mess[i] = [""]
+            }
+        }
+        console.log(mess)
+        return mess
+    }
 }
 

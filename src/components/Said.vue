@@ -11,18 +11,8 @@
 </template>
 <style lang="scss" src="./scss/said.scss"></style>
 <script>
-    import controller from './js/controller'
-
     export default {
         name: 'said',
-        data: function() {
-            return {
-
-            }
-        },
-        props: ['said'],
-        created () {
-
-        }
+        props: ['said']
     }
 </script>

@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div v-if="is_logouted">
+        <div v-if="is_logined">
+            <h1>すでにLoginしています</h1>
+            <a href="/">Timelineに戻る</a>
+        </div>
+        <div v-else>
             <h1>Log in</h1>
             <form>
                 <label>account name:<input type="text" v-model="accountName"></label><br>
@@ -11,10 +15,7 @@
             <div class="list">
                 {{ message }}
             </div>
-        </div>
-        <div v-else>
-            <h1>すでにLoginしています</h1>
-            <a href="/">Timelineに戻る</a>
+            <a href="#/registration/">登録ページへ</a>
         </div>
     </div>
 </template>
@@ -26,10 +27,10 @@
         name: 'login',
         data() {
             return {
+                is_logined: controller.is_logined(),
                 accountName: "",
                 password: "",
-                message: "ログインしてください",
-                is_logouted: !controller.is_logined()
+                message: "ログインしてください"
             };
         },
         methods: {
