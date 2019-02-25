@@ -26,12 +26,8 @@
                 emotion: ""
             }
         },
-        components: {
-            Said
-        },
+        components: { Said },
         props: ['uuid'],
-        computed: {
-        },
         watch: {
             uuid: {
                 handler: function(newer, older) {

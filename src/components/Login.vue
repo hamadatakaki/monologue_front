@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="is_logined">
+        <div v-if="isLogined">
             <h1>すでにLoginしています</h1>
             <a href="/">Timelineに戻る</a>
         </div>
@@ -27,7 +27,7 @@
         name: 'login',
         data() {
             return {
-                is_logined: controller.is_logined(),
+                isLogined: controller.isLogined(),
                 accountName: "",
                 password: "",
                 message: "ログインしてください"

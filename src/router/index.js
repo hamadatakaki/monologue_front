@@ -13,7 +13,7 @@ import controller from '../components/js/controller'
 Vue.use(Router)
 
 let redirectToLogin = ((to, from, next) => {
-  if (controller.is_logined()){
+  if (controller.isLogined()){
     next()
   }
   else {
