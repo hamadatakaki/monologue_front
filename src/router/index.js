@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Timeline from '@/components/Timeline'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
+import Registration from '@/components/Registration'
 import Profile from '@/components/Profile'
 import Fail from '@/components/Fail'
 
@@ -42,6 +43,11 @@ const router = new Router({
       meta: { requireAuth: true },
       beforeEnter: redirectToLogin,
       beforeUpdate: redirectToLogin
+    },
+    {
+      path: '/registration',
+      component: Registration,
+      name: 'registration'
     },
     {
       path: '/profile/:uuid',

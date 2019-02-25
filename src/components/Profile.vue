@@ -48,9 +48,16 @@
                             this.action = datas.action.action
                             this.emotion = datas.emotion.emotion
                         })
+                        .catch(badstatus => {
+                            let res = badstatus.response
+                            if (res.status === 403 || res.statusText === "Forbidden") {
+                                localStorage.token = ""
+                            }
 
+                            this.$router.push({ "name": "login" })
+                        })
                 }, immediate: true
             }
         }
-    } // TODO GO FOR IT!
+    }
 </script>

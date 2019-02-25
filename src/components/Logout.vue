@@ -4,7 +4,6 @@
         <form>
             <input type="button" @click="logout">
         </form>
-        <a href="#/login/">to login</a>
     </div>
 </template>
 <style lang="scss" src="./scss/logout.scss"></style>
