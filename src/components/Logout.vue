@@ -20,7 +20,7 @@
         methods: {
             logout() {
                 localStorage.token = "";
-
+                localStorage.accountName = null;
                 this.$router.push({ "name": "login" })
             }
         }

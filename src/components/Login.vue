@@ -2,20 +2,19 @@
     <div>
         <div v-if="isLogined">
             <h1>すでにLoginしています</h1>
-            <a href="/">Timelineに戻る</a>
+            <router-link :to="{ name: 'timeline' }">Timelineへ</router-link>
         </div>
         <div v-else>
             <h1>Log in</h1>
             <form>
-                <label>account name:<input type="text" v-model="accountName"></label><br>
+                <label>account ID:<input type="text" v-model="accountName"></label><br>
                 <label>password:<input type="password" v-model="password"></label><br>
-
                 <input type="button" @click="login">
             </form>
             <div class="list">
                 {{ message }}
             </div>
-            <a href="#/registration/">登録ページへ</a>
+            <router-link :to="{ name: 'registration' }">アカウント登録へ</router-link>
         </div>
     </div>
 </template>
@@ -43,6 +42,7 @@
                     .post("auth/login/", param)
                     .then(res => {
                         localStorage.token = res.data.key
+                        localStorage.accountName = param.username
                         this.$router.push({ "name": "timeline" })
                     }).catch(() => this.message = "アカウントID、もしくはパスワードが違います")
             }
