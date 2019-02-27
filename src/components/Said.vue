@@ -1,9 +1,9 @@
 <template>
     <div class="said">
         <h3>
-            <a :href="'#/profile/'+said.account.uuid+'/'">
+            <router-link :to="{ name: 'profile', params: { uuid: said.account.uuid} }">
                 {{ said.account.username }}
-            </a>
+            </router-link>
         </h3>
         <p>{{ said.datetime }}</p>
         <p>{{ said.text }}</p>

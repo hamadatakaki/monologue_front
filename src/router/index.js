@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import GeneralTab from '@/components/GeneralTab'
 import Timeline from '@/components/Timeline'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
@@ -13,7 +14,7 @@ import controller from '../components/js/controller'
 Vue.use(Router)
 
 let redirectToLogin = ((to, from, next) => {
-  if (controller.isLogined()){
+  if (controller.isLogined()) {
     next()
   }
   else {
@@ -24,52 +25,51 @@ let redirectToLogin = ((to, from, next) => {
 const router = new Router({
   routes: [
     {
-      path: '/',
-      component: Timeline,
-      name: "timeline",
-      meta: { requireAuth: true },
-      beforeEnter: redirectToLogin,
-      beforeUpdate: redirectToLogin
-    },
-    {
-      path: '/login',
-      component: Login,
-      name: 'login'
-    },
-    {
-      path: '/logout',
-      component: Logout,
-      name: 'logout',
-      meta: { requireAuth: true },
-      beforeEnter: redirectToLogin,
-      beforeUpdate: redirectToLogin
-    },
-    {
-      path: '/registration',
-      component: Registration,
-      name: 'registration'
-    },
-    {
-      path: '/profile/:uuid',
-      component: Profile,
-      name: 'profile',
-      props: true,
-      meta: { requireAuth: true },
-      beforeEnter: redirectToLogin,
-      beforeUpdate: redirectToLogin
-    },
-    {
-        path: '*',
-        component: Fail
+      path: "/",
+      component: GeneralTab,
+      children:[
+        {
+          path: 'login',
+          component: Login,
+          name: 'login'
+        },
+        {
+          path: 'logout',
+          component: Logout,
+          name: 'logout',
+          meta: { requireAuth: true },
+          beforeEnter: redirectToLogin,
+          beforeUpdate: redirectToLogin
+        },
+        {
+          path: 'registration',
+          component: Registration,
+          name: 'registration'
+        },
+        {
+          path: '',
+          component: Timeline,
+          name: "timeline",
+          meta: { requireAuth: true },
+          beforeEnter: redirectToLogin,
+          beforeUpdate: redirectToLogin
+        },
+        {
+          path: 'profile/:uuid',
+          component: Profile,
+          name: 'profile',
+          props: route => ({ uuid: String(route.params.uuid) }),
+          meta: { requireAuth: true },
+          beforeEnter: redirectToLogin,
+          beforeUpdate: redirectToLogin
+        },
+        {
+          path: '*',
+          component: Fail
+        }
+      ]
     }
   ]
 })
 
 export default router;
-
-/*
-TODO When the user is authorized or not, how the router is controlled ?
-  the user is authorized -> his timeline.
-          not authorized -> login page.
-  参考URL: https://qiita.com/takatama/items/05e9fbc7199cde4caf60
-*/

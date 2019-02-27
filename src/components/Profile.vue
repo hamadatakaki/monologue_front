@@ -15,6 +15,7 @@
     import Said from './Said';
 
     export default {
+        name: "profile",
         data: function () {
             return {
                 res: null,
@@ -27,7 +28,7 @@
             }
         },
         components: { Said },
-        props: ['uuid'],
+        props: { uuid: String },
         watch: {
             uuid: {
                 handler: function(newer, older) {
