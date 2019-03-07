@@ -4,7 +4,10 @@
             <ul>
                 <li><router-link :to="{ name: 'timeline' }">Timeline</router-link></li>
                 <li v-if="isLogined">
-                    <router-link :to="{ name: 'profile', params: { uuid: uuid } }">Profile</router-link>
+                    <router-link :to="{ name: 'profile', params: { account: accountName } }">Profile</router-link>
+                </li>
+                <li v-if="isLogined">
+                    <router-link :to="{ name: 'say' }">Say</router-link>
                 </li>
                 <li v-if="isLogined">
                     <router-link :to="{ name: 'logout' }">Logout</router-link>
@@ -22,19 +25,17 @@
         name: 'GeneralTab',
         data: function() {
             return {
-                uuid: "",
-                isLogined: controller.isLogined()
+                isLogined: localStorage.getItem('token') || '',
+                accountName: localStorage.getItem('accountName') || ''
             }
         },
-        created: function () {
-            let tokenHeader = { 'Authorization': "Token "+localStorage.token }
-            controller.axios
-                .get('accounts/'+this.accountID+'/uuid/', { headers: tokenHeader })
-                .then(response => this.uuid = response.data.uuid)
+        created: function(){
+            this.accountName = localStorage.getItem('accountName') || ''
         },
         watch: {
             '$route': function() {
-                this.isLogined = controller.isLogined()
+                this.isLogined = localStorage.getItem('token') || ''
+                this.accountName = localStorage.getItem('accountName') || ''
             }
         }
     }

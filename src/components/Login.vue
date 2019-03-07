@@ -13,6 +13,7 @@
             </form>
             <div class="list">
                 {{ message }}
+                {{ isLogined }}
             </div>
             <router-link :to="{ name: 'registration' }">アカウント登録へ</router-link>
         </div>
@@ -26,7 +27,7 @@
         name: 'login',
         data() {
             return {
-                isLogined: controller.isLogined(),
+                isLogined: localStorage.getItem('token') || "",
                 accountName: "",
                 password: "",
                 message: "ログインしてください"
