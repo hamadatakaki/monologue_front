@@ -7,6 +7,7 @@ import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import Registration from '@/components/Registration'
 import Profile from '@/components/Profile'
+import Say from '@/components/Say'
 import Fail from '@/components/Fail'
 
 import controller from '../components/js/controller'
@@ -14,7 +15,7 @@ import controller from '../components/js/controller'
 Vue.use(Router)
 
 let redirectToLogin = ((to, from, next) => {
-  if (controller.isLogined()) {
+  if (localStorage.getItem('token') || '') {
     next()
   }
   else {
@@ -55,10 +56,17 @@ const router = new Router({
           beforeUpdate: redirectToLogin
         },
         {
-          path: 'profile/:uuid',
+          path: 'profile/:account',
           component: Profile,
           name: 'profile',
-          props: route => ({ uuid: String(route.params.uuid) }),
+          meta: { requireAuth: true },
+          beforeEnter: redirectToLogin,
+          beforeUpdate: redirectToLogin
+        },
+        {
+          path: 'say',
+          component: Say,
+          name: 'say',
           meta: { requireAuth: true },
           beforeEnter: redirectToLogin,
           beforeUpdate: redirectToLogin

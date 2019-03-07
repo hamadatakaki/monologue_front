@@ -8,19 +8,17 @@
 </template>
 <style lang="scss" src="./scss/logout.scss"></style>
 <script>
-    import controller from "./js/controller";
-
     export default {
         name: "logout",
         data() {
             return {
-                userName: ""
+                accountName: ""
             };
         },
         methods: {
             logout() {
                 localStorage.token = "";
-                localStorage.accountName = null;
+                localStorage.accountName = "";
                 this.$router.push({ "name": "login" })
             }
         }

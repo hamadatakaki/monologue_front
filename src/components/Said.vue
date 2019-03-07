@@ -1,7 +1,7 @@
 <template>
     <div class="said">
         <h3>
-            <router-link :to="{ name: 'profile', params: { uuid: said.account.uuid} }">
+            <router-link :to="{ name: 'profile', params: { account: said.account.username } }">
                 {{ said.account.username }}
             </router-link>
         </h3>

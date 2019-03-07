@@ -2,8 +2,6 @@
     <div>
         <h1>{{ screen_name }}<span>@{{ accountID }}</span></h1>
         <p>{{ bio }}</p>
-        <p>current action: {{ action }}</p>
-        <p>current emotion: {{ emotion }}</p>
         <div v-for="said in saids">
             <said :said="said"></said>
         </div>
@@ -18,40 +16,25 @@
         name: "profile",
         data: function () {
             return {
-                res: null,
                 screen_name: "",
                 accountID: "",
                 bio: "",
-                saids: null,
-                action: null,
-                emotion: ""
+                saids: null
             }
         },
         components: { Said },
-        props: { uuid: String },
+        props: ['account'],
         watch: {
-            uuid: {
+            account: {
                 handler: function(newer, older) {
-                    let tokenHeader = { 'Authorization': "Token "+localStorage.token }
+                    let tokenHeader = { 'Authorization': "Token "+localStorage.getItem('token') }
                     controller.axios
-                        .get('accounts/'+newer, { headers: tokenHeader })
-                        .then(response => {
-                            let datas = response.data
-                            this.res = datas
-                            this.screen_name = datas.screen_name
-                            this.accountID = datas.username
-                            this.bio = datas.bio
-                            this.saids = datas.saids.reverse()
-                            this.action = datas.action.action
-                            this.emotion = datas.emotion.emotion
-                        })
-                        .catch(badstatus => {
-                            let res = badstatus.response
-                            if (res.status === 403 || res.statusText === "Forbidden") {
-                                localStorage.token = ""
-                            }
-
-                            this.$router.push({ "name": "login" })
+                        .get('accounts/info/'+localStorage.getItem('accountName')+'/', { headers: tokenHeader })
+                        .then(res => {
+                            this.screen_name = res.data.screen_name
+                            this.accountID = res.data.accountID
+                            this.bio = res.data.bio
+                            this.saids = res.data.saids.reverse()
                         })
                 }, immediate: true
             }
