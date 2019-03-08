@@ -7,6 +7,8 @@
         </h3>
         <p>{{ said.datetime }}</p>
         <p>{{ said.text }}</p>
+        <p>the action: {{ said.action.action }}</p>
+        <p>the emotion: {{ said.emotion.emotion }}</p>
     </div>
 </template>
 <style lang="scss" src="./scss/said.scss"></style>
