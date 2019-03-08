@@ -15,7 +15,7 @@
                     <option v-for="emo in emotions" :value="emo">{{emo}}</option>
                 </select>
             </label>
-            <input type="submit" @click="say">
+            <input type="submit" :disabled="isPushed" @click="say">
         </form>
     </div>
 </template>
@@ -34,12 +34,15 @@
                 action: "",
                 emotions: [],
                 emotion: "",
-                res: null
+                disabled: "disabled"
             }
         },
         computed: {
             rows: function () {
                 return this.text.split("\n").length + 3
+            },
+            isPushed: function () {
+                return this.text === ""
             }
         },
         methods: {
@@ -51,7 +54,7 @@
 
                 controller.axios
                     .post('say/', params, { headers: tokenHeader })
-                    .then(res => this.res = res)
+                    .then(() => this.$router.push({ "name": "timeline" }))
             }
         },
         watch: {

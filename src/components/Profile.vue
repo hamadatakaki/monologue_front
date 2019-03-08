@@ -19,7 +19,7 @@
                 screen_name: "",
                 accountID: "",
                 bio: "",
-                saids: null
+                saids: null,
             }
         },
         components: { Said },
@@ -32,7 +32,7 @@
                         .get('accounts/info/'+localStorage.getItem('accountName')+'/', { headers: tokenHeader })
                         .then(res => {
                             this.screen_name = res.data.screen_name
-                            this.accountID = res.data.accountID
+                            this.accountID = res.data.username
                             this.bio = res.data.bio
                             this.saids = res.data.saids.reverse()
                         })
