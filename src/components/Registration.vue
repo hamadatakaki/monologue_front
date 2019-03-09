@@ -1,11 +1,11 @@
 <template>
     <div>
         <div v-if="isLogined">
-            <h1>すでにLoginしています</h1>
+            <h1 class="panel-heading">すでにLoginしています</h1>
             <router-link :to="{ name: 'timeline' }">Timelineへ</router-link>
         </div>
         <div v-else>
-            <h1>Registration</h1>
+            <h1 class="panel-heading">Registration</h1>
             <form>
                 <label>account ID:<input type="text" v-model="accountName"></label><br>
                 <label>email:<input type="text" v-model="email"></label><br>

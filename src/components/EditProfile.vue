@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1>Profile Edit</h1>
-        <form>
-            <label>account name:<input type="text" v-model="screen_name"></label><br>
-            <label>bio:<textarea v-model="bio"></textarea></label><br>
-            <input type="button" @click="edit">
+        <h1 class="panel-heading">Profile Edit</h1>
+        <form class="control">
+            <label>account name:<input class="input" type="text" v-model="screen_name"></label><br>
+            <label>bio:<textarea class="textarea" v-model="bio"></textarea></label><br>
+            <button class="button is-primary" @click="edit">変更する</button>
         </form>
     </div>
 </template>

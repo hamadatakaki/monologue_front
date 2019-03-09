@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Searching result page: {{ $route.params.query }}</h1>
+        <h1 class="panel-heading">Searching result page: {{ $route.params.query }}</h1>
         <div id="user-saids">
             <div v-for="said in saids">
                 <said :said="said"></said>

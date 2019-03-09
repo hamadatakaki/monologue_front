@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Timeline</h1>
+        <h1 class="panel-heading">Timeline</h1>
         <div id="user-saids">
             <div v-for="said in saids">
                 <said :said="said"></said>
@@ -8,7 +8,12 @@
         </div>
     </div>
 </template>
-<style lang="scss" src="./scss/timeline.scss"></style>
+<style lang="scss">
+    #user-saids {
+        border-right: 400px;
+        border-left: 400px;
+    }
+</style>
 <script>
     import controller from './js/controller'
     import Said from './Said'
