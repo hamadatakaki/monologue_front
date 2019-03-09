@@ -38,17 +38,17 @@
         },
         methods: {
             registration: function () {
-                let param = {}
-                param.username = this.accountName
-                param.email = this.email
-                param.password1 = this.password1
-                param.password2 = this.password2
+                let params = {}
+                params.username = this.accountName
+                params.email = this.email
+                params.password1 = this.password1
+                params.password2 = this.password2
 
                 controller.axios
-                    .post("auth/registration/", param)
+                    .post("auth/registration/", params)
                     .then(response => {
                         localStorage.token = response.data.key
-                        localStorage.accountName = param.username
+                        localStorage.accountName = params.username
                         this.$router.push({ "name": "timeline" })
                     })
                     .catch(() => this.message = "data is invalid")

@@ -13,7 +13,6 @@
             </form>
             <div class="list">
                 {{ message }}
-                {{ isLogined }}
             </div>
             <router-link :to="{ name: 'registration' }">アカウント登録へ</router-link>
         </div>
@@ -25,7 +24,7 @@
 
     export default {
         name: 'login',
-        data() {
+        data: function () {
             return {
                 isLogined: localStorage.getItem('token') || "",
                 accountName: "",
@@ -35,15 +34,15 @@
         },
         methods: {
             login() {
-                let param = {}
-                param.username = this.accountName
-                param.password = this.password
+                let params = {}
+                params.username = this.accountName
+                params.password = this.password
 
                 controller.axios
-                    .post("auth/login/", param)
+                    .post("auth/login/", params)
                     .then(res => {
                         localStorage.token = res.data.key
-                        localStorage.accountName = param.username
+                        localStorage.accountName = params.username
                         this.$router.push({ "name": "timeline" })
                     }).catch(() => this.message = "アカウントID、もしくはパスワードが違います")
             }

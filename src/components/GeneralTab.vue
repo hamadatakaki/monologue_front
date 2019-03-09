@@ -15,6 +15,17 @@
             </ul>
         </header>
         <router-view></router-view>
+        <footer>
+            <p>
+                何かバグがあればTwitterで<a href="https://twitter.com/hmd03230101">@hmd03230101</a>までメッセージをください<br>
+                コンフェス中でも直します
+            </p>
+            <p>
+                ソースコードはだいたいGitHubにあります<br>
+                <a href="https://github.com/hamadatakaki/monologue_server">バックエンド</a>はこれ<br>
+                <a href="https://github.com/hamadatakaki/monologue_front">フロントエンド</a>はこれ
+            </p>
+        </footer>
     </div>
 </template>
 

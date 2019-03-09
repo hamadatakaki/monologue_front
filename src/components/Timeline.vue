@@ -22,9 +22,7 @@
         },
         components: { Said },
         created: function () {
-            let tokenHeader = {
-                'Authorization': "Token " + localStorage.token
-            };
+            let tokenHeader = { 'Authorization': "Token " + localStorage.token };
             controller.axios
                 .get('timeline/', { headers: tokenHeader })
                 .then(response => {

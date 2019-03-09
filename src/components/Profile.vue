@@ -6,6 +6,10 @@
             <input type="button" value="unfollow" v-if="alreadyFollow" @click="unfollow">
             <input type="button" value="follow" v-if="!alreadyFollow" @click="follow">
         </div>
+        <div v-else>
+            <router-link :to="{ name: 'edit-profile' }">プロフィールを編集する</router-link>
+        </div>
+
         <div v-for="said in saids">
             <said :said="said"></said>
         </div>
@@ -68,7 +72,7 @@
                 handler: function(newer, older) {
                     let tokenHeader = { 'Authorization': "Token "+localStorage.getItem('token') }
                     controller.axios
-                        .get('accounts/info/'+this.$route.params.account+'/', { headers: tokenHeader })
+                        .get('accounts/'+this.$route.params.account+'/info/', { headers: tokenHeader })
                         .then(res => {
                             this.screen_name = res.data.screen_name
                             this.accountID = res.data.username

@@ -7,10 +7,9 @@ import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import Registration from '@/components/Registration'
 import Profile from '@/components/Profile'
+import EditProfile from '@/components/EditProfile'
 import Say from '@/components/Say'
 import Fail from '@/components/Fail'
-
-import controller from '../components/js/controller'
 
 Vue.use(Router)
 
@@ -26,14 +25,19 @@ let redirectToLogin = ((to, from, next) => {
 const router = new Router({
   routes: [
     {
+      path: '/login',
+      component: Login,
+      name: 'login'
+    },
+    {
+      path: '/registration',
+      component: Registration,
+      name: 'registration'
+    },
+    {
       path: "/",
       component: GeneralTab,
       children:[
-        {
-          path: 'login',
-          component: Login,
-          name: 'login'
-        },
         {
           path: 'logout',
           component: Logout,
@@ -41,11 +45,6 @@ const router = new Router({
           meta: { requireAuth: true },
           beforeEnter: redirectToLogin,
           beforeUpdate: redirectToLogin
-        },
-        {
-          path: 'registration',
-          component: Registration,
-          name: 'registration'
         },
         {
           path: '',
@@ -64,18 +63,26 @@ const router = new Router({
           beforeUpdate: redirectToLogin
         },
         {
+          path: 'profile/:account/edit',
+          component: EditProfile,
+          name: 'edit-profile',
+          meta: { requireAuth: true },
+          beforeEnter: redirectToLogin,
+          beforeUpdate: redirectToLogin
+        },
+        {
           path: 'say',
           component: Say,
           name: 'say',
           meta: { requireAuth: true },
           beforeEnter: redirectToLogin,
           beforeUpdate: redirectToLogin
-        },
-        {
-          path: '*',
-          component: Fail
         }
       ]
+    },
+    {
+      path: '*',
+      component: Fail
     }
   ]
 })

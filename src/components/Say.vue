@@ -15,7 +15,9 @@
                     <option v-for="emo in emotions" :value="emo">{{emo}}</option>
                 </select>
             </label>
-            <input type="submit" :disabled="isPushed" @click="say">
+            <router-link :to="{ name: 'timeline' }">
+                <input type="submit" :disabled="isPushed" @click="say">
+            </router-link>
         </form>
     </div>
 </template>
@@ -54,7 +56,7 @@
 
                 controller.axios
                     .post('say/', params, { headers: tokenHeader })
-                    .then(() => this.$router.push({ "name": "timeline" }))
+                    .then(() => this.$router.go({ "name": "timeline" }))
             }
         },
         watch: {
