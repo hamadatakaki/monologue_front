@@ -1,8 +1,9 @@
 <template>
     <div>
-        <h1>log out</h1>
+        <h1 class="panel-heading">log out</h1>
         <form>
-            <input type="button" @click="logout">
+            <br>
+            <input class="button is-primary" value="ログアウト" name="ログアウト" type="button" @click="logout">
         </form>
     </div>
 </template>

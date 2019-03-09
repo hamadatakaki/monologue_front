@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>this is fail page</h2>
+        <h1 class="panel-heading">this is fail page</h1>
         <router-link :to="{ name: 'timeline' }">Timelineへ</router-link>
     </div>
 </template>
