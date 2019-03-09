@@ -8,6 +8,7 @@ import Logout from '@/components/Logout'
 import Registration from '@/components/Registration'
 import Profile from '@/components/Profile'
 import EditProfile from '@/components/EditProfile'
+import SearchResult from '@/components/SearchResult'
 import Say from '@/components/Say'
 import Fail from '@/components/Fail'
 
@@ -66,6 +67,14 @@ const router = new Router({
           path: 'profile/:account/edit',
           component: EditProfile,
           name: 'edit-profile',
+          meta: { requireAuth: true },
+          beforeEnter: redirectToLogin,
+          beforeUpdate: redirectToLogin
+        },
+        {
+          path: 'search/:query',
+          component: SearchResult,
+          name: 'search-result',
           meta: { requireAuth: true },
           beforeEnter: redirectToLogin,
           beforeUpdate: redirectToLogin

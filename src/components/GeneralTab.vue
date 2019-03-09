@@ -1,18 +1,14 @@
 <template>
     <div>
-        <header>
+        <header v-if="isLogined">
             <ul>
                 <li><router-link :to="{ name: 'timeline' }">Timeline</router-link></li>
-                <li v-if="isLogined">
-                    <router-link :to="{ name: 'profile', params: { account: accountName } }">Profile</router-link>
-                </li>
-                <li v-if="isLogined">
-                    <router-link :to="{ name: 'say' }">Say</router-link>
-                </li>
-                <li v-if="isLogined">
-                    <router-link :to="{ name: 'logout' }">Logout</router-link>
-                </li>
+                <li><router-link :to="{ name: 'profile', params: { account: accountName } }">Profile</router-link></li>
+                <li><router-link :to="{ name: 'say' }">Say</router-link></li>
+                <li><router-link :to="{ name: 'logout' }">Logout</router-link></li>
             </ul>
+            <label><input type="text" v-model="searchQuery"/></label>
+            <label><button type='submit' @click="search">検索</button></label>
         </header>
         <router-view></router-view>
         <footer>
@@ -37,14 +33,24 @@
         data: function() {
             return {
                 isLogined: localStorage.getItem('token') || '',
-                accountName: localStorage.getItem('accountName') || ''
+                accountName: localStorage.getItem('accountName') || '',
+                searchQuery: ""
             }
         },
         created: function(){
             this.accountName = localStorage.getItem('accountName') || ''
         },
+        methods: {
+            search: function () {
+                if(this.searchQuery){
+                    let query = this.searchQuery
+                    this.$router.push({ name: 'search-result', params: { query: query } })
+                }
+            }
+        },
         watch: {
             '$route': function() {
+                this.searchQuery = ""
                 this.isLogined = localStorage.getItem('token') || ''
                 this.accountName = localStorage.getItem('accountName') || ''
             }
