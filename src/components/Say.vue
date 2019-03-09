@@ -1,19 +1,12 @@
 <template>
     <div>
         <form>
-            <label>本文
-                <textarea v-model="text" :rows="rows">
-                </textarea>
-            </label>
+            <label>本文<textarea v-model="text" :rows="rows"></textarea></label>
             <label>アクション
-                <select name="action" v-model="action">
-                    <option v-for="act in actions" :value="act">{{act}}</option>
-                </select>
+                <vue-simple-suggest v-model="action" :list="suggestAction" :filter-by-query="true"></vue-simple-suggest>
             </label>
             <label>エモーション
-                <select name="emotion" v-model="emotion">
-                    <option v-for="emo in emotions" :value="emo">{{emo}}</option>
-                </select>
+                <vue-simple-suggest v-model="emotion" :list="suggestEmotion" :filter-by-query="true"></vue-simple-suggest>
             </label>
             <router-link :to="{ name: 'timeline' }">
                 <input type="submit" :disabled="isPushed" @click="say">
@@ -23,12 +16,15 @@
 </template>
 
 <script>
-    import controller from "./js/controller";
+    import controller from "./js/controller"
+    import VueSimpleSuggest from 'vue-simple-suggest'
+    import 'vue-simple-suggest/dist/styles.css'
 
     let tokenHeader = { 'Authorization': "Token "+localStorage.getItem('token') }
 
     export default {
         name: 'Say',
+        components: { VueSimpleSuggest },
         data: function () {
             return {
                 text: "",
@@ -57,6 +53,12 @@
                 controller.axios
                     .post('say/', params, { headers: tokenHeader })
                     .then(() => this.$router.go({ "name": "timeline" }))
+            },
+            suggestAction: function () {
+                return this.actions
+            },
+            suggestEmotion: function () {
+                return this.emotions
             }
         },
         watch: {
