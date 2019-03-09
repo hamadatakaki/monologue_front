@@ -2,6 +2,10 @@
     <div>
         <h1>{{ screen_name }}<span>@{{ accountID }}</span></h1>
         <p>{{ bio }}</p>
+        <div v-if="isNotMe">
+            <input type="button" value="unfollow" v-if="alreadyFollow" @click="unfollow">
+            <input type="button" value="follow" v-if="!alreadyFollow" @click="follow">
+        </div>
         <div v-for="said in saids">
             <said :said="said"></said>
         </div>
@@ -12,6 +16,8 @@
     import controller from "./js/controller";
     import Said from './Said';
 
+    let tokenHeader = { 'Authorization': "Token "+localStorage.getItem('token') }
+
     export default {
         name: "profile",
         data: function () {
@@ -20,21 +26,60 @@
                 accountID: "",
                 bio: "",
                 saids: null,
+                followers: []
+            }
+        },
+        computed: {
+            alreadyFollow: function () {
+                let me = localStorage.getItem('accountName')
+                return this.followers.find(follower => follower === me)
+            },
+            isNotMe: function () {
+                let me = localStorage.getItem('accountName')
+                return this.$route.params.account !== me
+            }
+        },
+        methods: {
+            follow: function () {
+                let params = {}
+                params.accountID = this.$route.params.account
+                controller.axios
+                    .post('follow/', params, { headers: tokenHeader })
+                    .then(() => this.$router.go({
+                        name: "profile",
+                        params: { account: params.accountID }
+                    }))
+            },
+            unfollow: function () {
+                let params = {}
+                params.accountID = this.$route.params.account
+                controller.axios
+                    .post('unfollow/', params, { headers: tokenHeader })
+                    .then(() => this.$router.go({
+                        name: "profile",
+                        params: { account: params.accountID }
+                    }))
             }
         },
         components: { Said },
         props: ['account'],
         watch: {
-            account: {
+            $route: {
                 handler: function(newer, older) {
                     let tokenHeader = { 'Authorization': "Token "+localStorage.getItem('token') }
                     controller.axios
-                        .get('accounts/info/'+localStorage.getItem('accountName')+'/', { headers: tokenHeader })
+                        .get('accounts/info/'+this.$route.params.account+'/', { headers: tokenHeader })
                         .then(res => {
                             this.screen_name = res.data.screen_name
                             this.accountID = res.data.username
                             this.bio = res.data.bio
                             this.saids = res.data.saids.reverse()
+                        })
+                    controller.axios
+                        .get('accounts/'+this.$route.params.account+"/followers/", { headers: tokenHeader })
+                        .then(res => {
+                            let tmp = res.data.followers
+                            tmp.map(fo => this.followers.push(fo.username))
                         })
                 }, immediate: true
             }
