@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  ENDPOINT: '"http://127.0.0.1:8000/api/"'
+  ENDPOINT: '"http://ec2-18-191-141-249.us-east-2.compute.amazonaws.com/api/"'
 }
