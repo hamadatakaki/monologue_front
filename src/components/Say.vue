@@ -1,7 +1,10 @@
 <template>
     <div>
-        <form>
-            <label>本文<textarea v-model="text" :rows="rows"></textarea></label>
+        <h1 class="panel-heading">投稿する</h1>
+        <form class="control">
+            <label>本文
+                <textarea class="textarea" v-model="text" :rows="rows"></textarea>
+            </label>
             <label>アクション
                 <vue-simple-suggest v-model="action" :list="suggestAction" :filter-by-query="true"></vue-simple-suggest>
             </label>
@@ -9,7 +12,9 @@
                 <vue-simple-suggest v-model="emotion" :list="suggestEmotion" :filter-by-query="true"></vue-simple-suggest>
             </label>
             <router-link :to="{ name: 'timeline' }">
-                <input type="submit" :disabled="isPushed" @click="say">
+                <br>
+                <input class="button is-primary" type="submit" :disabled="isPushed" @click="say">
+                <br>
             </router-link>
         </form>
     </div>

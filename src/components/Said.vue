@@ -1,20 +1,34 @@
 <template>
-    <div class="said">
-        <h3>
-            <router-link :to="{ name: 'profile', params: { account: said.account.username } }">
-                {{ said.account.username }}
-            </router-link>
-        </h3>
-        <p>{{ said.datetime }}</p>
-        <p>{{ said.text }}</p>
-        <p>the action: {{ said.action.action }}</p>
-        <p>the emotion: {{ said.emotion.emotion }}</p>
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+                <router-link :to="{ name: 'profile', params: { account: said.account.username } }">
+                    {{ said.account.username }}
+                </router-link>
+            </p>
+            <p class="card-header-title"><time>{{ time }}</time></p>
+        </header>
+
+        <div class="card-content">
+            <div class="content">
+                <p class="title">{{ said.text }}</p>
+                <p class="subtitle">アクション: {{ said.action.action }}<br>エモーション: {{ said.emotion.emotion }}</p>
+            </div>
+        </div>
     </div>
 </template>
-<style lang="scss" src="./scss/said.scss"></style>
+<style lang="scss" scoped>
+
+</style>
 <script>
     export default {
         name: 'said',
-        props: ['said']
+        props: ['said'],
+        computed: {
+            time: function () {
+                let datetime = this.said.datetime.slice(0, 19).replace("T", " ")
+                return datetime
+            }
+        }
     }
 </script>

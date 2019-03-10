@@ -1,15 +1,15 @@
 <template>
     <div>
         <div v-if="isLogined">
-            <h1>すでにLoginしています</h1>
+            <h1 class="panel-heading">すでにLoginしています</h1>
             <router-link :to="{ name: 'timeline' }">Timelineへ</router-link>
         </div>
         <div v-else>
-            <h1>Log in</h1>
+            <h1 class="panel-heading">Log in</h1>
             <form>
                 <label>account ID:<input type="text" v-model="accountName"></label><br>
                 <label>password:<input type="password" v-model="password"></label><br>
-                <input type="button" @click="login">
+                <input class="button is-primary" type="button" @click="login">
             </form>
             <div class="list">
                 {{ message }}
@@ -18,7 +18,7 @@
         </div>
     </div>
 </template>
-<style lang="scss" src="./scss/login.scss"></style>
+<style lang="scss" src="./scss/login.scss" scoped></style>
 <script>
     import controller from "./js/controller";
 

@@ -1,13 +1,17 @@
 <template>
     <div>
-        <h1>{{ screen_name }}<span>@{{ accountID }}</span></h1>
-        <p>{{ bio }}</p>
+        <h1 class="panel-heading">{{ screen_name }}<span>@{{ accountID }}</span></h1>
+        <article class="message">
+            <div class="message-body is-white">
+                <p>{{ bio }}</p>
+            </div>
+        </article>
         <div v-if="isNotMe">
-            <input type="button" value="unfollow" v-if="alreadyFollow" @click="unfollow">
-            <input type="button" value="follow" v-if="!alreadyFollow" @click="follow">
+            <input class="button is-primary" type="button" value="unfollow" v-if="alreadyFollow" @click="unfollow">
+            <input class="button is-primary" type="button" value="follow" v-if="!alreadyFollow" @click="follow">
         </div>
         <div v-else>
-            <router-link :to="{ name: 'edit-profile' }">プロフィールを編集する</router-link>
+            <router-link :to="{ name: 'edit-profile' }"><button class="button is-primary">プロフィールを編集する</button></router-link>
         </div>
 
         <div v-for="said in saids">
