@@ -28,7 +28,7 @@
         name: 'registration',
         data: function () {
             return {
-                isLogined: controller.isLogined(),
+                isLogined: localStorage.getItem('token') || "",
                 accountName: "",
                 email: "",
                 password1: "",
