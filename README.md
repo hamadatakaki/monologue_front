@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+敗北者
+
 ## Build Setup
 
 ``` bash
