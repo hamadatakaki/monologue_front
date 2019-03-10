@@ -26,20 +26,25 @@
             }
         },
         components: { Said },
-        created: function () {
-            let tokenHeader = { 'Authorization': "Token " + localStorage.token };
-            controller.axios
-                .get('timeline/', { headers: tokenHeader })
-                .then(response => {
-                    this.saids = response.data;
-                })
-                .catch(badStatus => {
-                    let res = badStatus.response
-                    if (res.status === 403 || res.statusText === "Forbidden") {
-                        localStorage.token = ""
-                    }
-                    this.$router.push({ "name": "login" })
-                })
+        watch: {
+            $route: {
+                handler: function(newer, older) {
+                    let tokenHeader = { 'Authorization': "Token " + localStorage.token };
+                    controller.axios
+                        .get('timeline/', { headers: tokenHeader })
+                        .then(response => {
+                            this.saids = response.data;
+                        })
+                        .catch(badStatus => {
+                            let res = badStatus.response
+                            if (res.status === 403 || res.statusText === "Forbidden") {
+                                localStorage.token = ""
+                            }
+                            this.$router.push({ "name": "login" })
+                        })
+                }, immediate: true
+            }
         }
+
     }
 </script>
